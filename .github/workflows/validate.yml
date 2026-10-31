@@ -1,0 +1,19 @@
+name: Validate Python examples
+on:
+  pull_request:
+  push:
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v7.1.0
+        with:
+          python-version-file: .python-version
+      - run: python data_initilization.py 1 2 3
+      - run: python data_initilization.py
+      - run: python model.py
